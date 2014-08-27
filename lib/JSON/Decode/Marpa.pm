@@ -124,14 +124,14 @@ sub from_json {
 
 =head1 DESCRIPTION
 
-This module is based on L<MarpaX::Demo::JSONParser> and makes it more convenient
-to use. I packaged this for casual benchmarking against L<Pegex::JSON> and
-L<JSON::Decode::Regexp>.
+This module is based on L<MarpaX::Demo::JSONParser> (using C<json.2.bnf>), but
+offers a more convenient interface for JSON decoding. I packaged this for casual
+benchmarking against L<Pegex::JSON> and L<JSON::Decode::Regexp>.
 
 The result on my computer: Pegex::JSON and JSON::Decode::Marpa are roughly the
 same speed (but Pegex has a much smaller startup overhead than Marpa).
 JSON::Decode::Regexp is about an order of magnitude faster than this module, and
-JSON::XS is about I<three orders of magniture> faster. So that's that.
+JSON::XS is about I<three orders of magnitude> faster. So that's that.
 
 
 =head1 FUNCTIONS
