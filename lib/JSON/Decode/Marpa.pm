@@ -133,6 +133,28 @@ same speed (but Pegex has a much smaller startup overhead than Marpa).
 JSON::Decode::Regexp is about an order of magnitude faster than this module, and
 JSON::XS is about I<three orders of magnitude> faster. So that's that.
 
+This is the benchmark code used:
+
+ use 5.010;
+ use strict;
+ use warnings;
+
+ use Benchmark qw(timethese);
+ use JSON::Decode::Marpa ();
+ use JSON::Decode::Regexp ();
+ use JSON::XS ();
+ use Pegex::JSON;
+
+ my $json = q([1,"abc\ndef",-2.3,null,[],[1,2,3],{},{"a":1,"b":2}]);
+ my $pgx  = Pegex::JSON->new;
+
+ timethese -0.5, {
+     pegex  => sub { $pgx->load($json) },
+     regexp => sub { JSON::Decode::Regexp::from_json($json) },
+     marpa  => sub { JSON::Decode::Marpa::from_json($json) },
+     xs     => sub { JSON::XS::decode_json($json) },
+ };
+
 
 =head1 FUNCTIONS
 
